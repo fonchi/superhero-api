@@ -129,7 +129,7 @@ public class SuperHeroServiceTest {
 
     Long id = -1L;
 
-    when(superHeroRepository.findById(id)).thenReturn(null);
+    when(superHeroRepository.findById(id)).thenReturn(Optional.empty());
 
     assertThrows(NotFoundException.class, () -> superHeroService.findById(id));
   }

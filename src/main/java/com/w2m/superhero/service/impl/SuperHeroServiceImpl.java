@@ -58,12 +58,16 @@ public class SuperHeroServiceImpl implements SuperHeroService {
     //publish superhero updating event on news queue topic using a message queue producer (e.g. Kafka)
 
     //TODO
-    //post superhero update metrics throught metrics collector service using metric tools like New Relic or DataDog
+    //post superhero update metrics through metrics collector service using metric tools like New Relic or DataDog
     return updatedSH;
   }
 
   @Override
   public SuperHero remove(Long id) {
-    return null;
+
+    SuperHero superHero = findById(id);
+    superHeroRepository.delete(superHero);
+
+    return superHero;
   }
 }
