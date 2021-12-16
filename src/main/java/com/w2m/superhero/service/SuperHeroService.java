@@ -9,4 +9,6 @@ public interface SuperHeroService {
   Optional<SuperHero> findById(Long id);
 
   List<SuperHero> findAll();
+
+  List<SuperHero> findLikeName(String name);
 }

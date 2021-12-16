@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface SuperHeroRepository extends CrudRepository<SuperHero, Long> {
 
   List<SuperHero> findAll();
+
+  List<SuperHero> findByNameIgnoreCaseContaining(String name);
 }

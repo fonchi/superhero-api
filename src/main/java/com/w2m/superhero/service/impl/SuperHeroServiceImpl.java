@@ -31,4 +31,9 @@ public class SuperHeroServiceImpl implements SuperHeroService {
     List<SuperHero> superHeroes = superHeroRepository.findAll();
     return superHeroes;
   }
+
+  @Override
+  public List<SuperHero> findLikeName(String name) {
+    return null;
+  }
 }

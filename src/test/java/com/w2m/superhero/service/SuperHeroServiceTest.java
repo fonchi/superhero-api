@@ -58,4 +58,17 @@ public class SuperHeroServiceTest {
     assertEquals(superHeroes, result);
   }
 
+  @Test
+  public void givenNameParam_whenFindLikeName_thenListAllSuperHeroesThanMatched() {
+
+    String name = "man";
+    List<SuperHero> superHeroes = TestUtils.getSuperHeroes();
+
+    when(superHeroRepository.findByNameIgnoreCaseContaining(name)).thenReturn(superHeroes);
+
+    List<SuperHero> result = superHeroService.findLikeName(name);
+
+    assertEquals(superHeroes, result);
+  }
+
 }

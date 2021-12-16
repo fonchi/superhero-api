@@ -7,9 +7,10 @@ import java.util.List;
 public class TestUtils {
 
   public static List<SuperHero> getSuperHeroes() {
-    SuperHero batman = SuperHero.builder().id(1L).name("Batman").build();
-    SuperHero robin = SuperHero.builder().id(2L).name("Robin").build();
-    return Arrays.asList(batman, robin);
+    SuperHero s1 = SuperHero.builder().id(1L).name("Spiderman").build();
+    SuperHero s2 = SuperHero.builder().id(2L).name("Superman").build();
+    SuperHero s3 = SuperHero.builder().id(3L).name("Manolito el fuerte").build();
+    return Arrays.asList(s1, s2, s3);
   }
 
 }
