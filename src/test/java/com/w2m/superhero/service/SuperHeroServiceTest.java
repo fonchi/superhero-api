@@ -2,7 +2,7 @@ package com.w2m.superhero.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.only;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -34,9 +34,9 @@ public class SuperHeroServiceTest {
 
     when(superHeroRepository.findById(id)).thenReturn(Optional.of(superHero));
 
-    Optional<SuperHero> result = superHeroService.findById(id);
+    SuperHero result = superHeroService.findById(id);
 
-    assertEquals(superHero, result.get());
+    assertEquals(superHero, result);
   }
 
   @Test
@@ -79,19 +79,23 @@ public class SuperHeroServiceTest {
 
     LocalDateTime updatedDate = LocalDateTime.of(2021, 12, 16, 00, 00, 00);
     LocalDateTime creationDate = LocalDateTime.of(2021, 11, 01, 00, 00, 00);
-    SuperHero newSH = SuperHero.builder().id(1L).name("Robin").build();
+    SuperHero newSH = SuperHero.builder().id(1L).name("Robin").updatedDate(updatedDate).build();
     SuperHero oldSH = SuperHero.builder().id(1L).name("Batman").creationDate(creationDate).build();
     SuperHero updatedSH = SuperHero.builder().id(1L).name("Robin").creationDate(creationDate)
         .updatedDate(updatedDate).build();
 
     when(superHeroRepository.findById(newSH.getId())).thenReturn(Optional.of(oldSH));
-    when(superHeroRepository.save(newSH)).thenReturn(updatedSH);
+    when(superHeroRepository.save(updatedSH)).thenReturn(updatedSH);
 
     SuperHero result = superHeroService.update(newSH);
 
     assertEquals(updatedSH, result);
-    verify(superHeroRepository, only()).findById(newSH.getId());
-    verify(superHeroRepository, only()).save(newSH);
+    verify(superHeroRepository, times(1)).findById(newSH.getId());
+    verify(superHeroRepository, times(1)).save(updatedSH);
   }
+
+  //test update idempotency check
+
+  //test update lock resource
 
 }

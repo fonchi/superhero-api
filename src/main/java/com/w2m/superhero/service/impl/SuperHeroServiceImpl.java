@@ -16,13 +16,13 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   private SuperHeroRepository superHeroRepository;
 
   @Override
-  public Optional<SuperHero> findById(Long id) {
+  public SuperHero findById(Long id) {
 
     Optional<SuperHero> superHero = superHeroRepository.findById(id);
     if (!superHero.isPresent()) {
       throw new NotFoundException();
     }
-    return superHero;
+    return superHero.get();
   }
 
   @Override
@@ -41,6 +41,12 @@ public class SuperHeroServiceImpl implements SuperHeroService {
 
   @Override
   public SuperHero update(SuperHero superHero) {
-    return null;
+
+    SuperHero oldSH = findById(superHero.getId());
+    oldSH.setName(superHero.getName());
+    oldSH.setUpdatedDate(superHero.getUpdatedDate());
+
+    SuperHero updatedSH = superHeroRepository.save(oldSH);
+    return updatedSH;
   }
 }
