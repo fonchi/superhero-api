@@ -8,5 +8,5 @@ public interface SuperHeroService {
 
   Optional<SuperHero> findById(Long id);
 
-  List<SuperHero> findAll(int page, int size);
+  List<SuperHero> findAll();
 }

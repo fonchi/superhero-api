@@ -6,7 +6,7 @@ import java.util.List;
 
 public class TestUtils {
 
-  public static List<SuperHero> getSuperHeros() {
+  public static List<SuperHero> getSuperHeroes() {
     SuperHero batman = SuperHero.builder().id(1L).name("Batman").build();
     SuperHero robin = SuperHero.builder().id(2L).name("Robin").build();
     return Arrays.asList(batman, robin);

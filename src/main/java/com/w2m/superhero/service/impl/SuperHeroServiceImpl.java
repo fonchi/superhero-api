@@ -26,7 +26,7 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   }
 
   @Override
-  public List<SuperHero> findAll(int page, int size) {
+  public List<SuperHero> findAll() {
     return null;
   }
 }
