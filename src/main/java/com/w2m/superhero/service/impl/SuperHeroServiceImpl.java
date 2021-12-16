@@ -43,6 +43,9 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   public SuperHero update(SuperHero superHero) {
 
     SuperHero oldSH = findById(superHero.getId());
+    if (oldSH.areIdempotent(superHero)) {
+      return oldSH;
+    }
     oldSH.setName(superHero.getName());
     oldSH.setUpdatedDate(superHero.getUpdatedDate());
 
