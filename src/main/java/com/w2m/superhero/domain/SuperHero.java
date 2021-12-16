@@ -1,6 +1,6 @@
 package com.w2m.superhero.domain;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import lombok.Builder;
@@ -18,5 +18,6 @@ public class SuperHero {
   @GeneratedValue
   private Long id;
   private String name;
-  private Instant creationDate;
+  private LocalDateTime creationDate;
+  private LocalDateTime updatedDate;
 }

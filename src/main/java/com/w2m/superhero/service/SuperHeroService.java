@@ -11,4 +11,6 @@ public interface SuperHeroService {
   List<SuperHero> findAll();
 
   List<SuperHero> searchByName(String name);
+
+  SuperHero update(SuperHero superHero);
 }

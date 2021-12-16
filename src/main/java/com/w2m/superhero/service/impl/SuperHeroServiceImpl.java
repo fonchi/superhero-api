@@ -38,4 +38,9 @@ public class SuperHeroServiceImpl implements SuperHeroService {
     List<SuperHero> superHeroes = superHeroRepository.findByNameIgnoreCaseContaining(name);
     return superHeroes;
   }
+
+  @Override
+  public SuperHero update(SuperHero superHero) {
+    return null;
+  }
 }
