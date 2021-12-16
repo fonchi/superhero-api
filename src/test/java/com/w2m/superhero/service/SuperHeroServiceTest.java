@@ -2,6 +2,7 @@ package com.w2m.superhero.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -107,5 +108,29 @@ public class SuperHeroServiceTest {
 
     assertEquals(oldSH, result);
     verify(superHeroRepository, only()).findById(newSH.getId());
+  }
+
+  @Test
+  public void givenAnValidSuperHeroId_whenRemove_thenSuccessDeleted() {
+
+    SuperHero superHero = TestUtils.getSuperHeroes().get(0);
+    Long id = superHero.getId();
+
+    when(superHeroRepository.findById(id)).thenReturn(Optional.of(superHero));
+    doNothing().when(superHeroRepository).delete(superHero);
+
+    SuperHero result = superHeroService.remove(id);
+
+    assertEquals(superHero, result);
+  }
+
+  @Test
+  public void givenAnInvalidSuperHeroId_whenRemove_thenThrowNotFoundException() {
+
+    Long id = -1L;
+
+    when(superHeroRepository.findById(id)).thenReturn(null);
+
+    assertThrows(NotFoundException.class, () -> superHeroService.findById(id));
   }
 }

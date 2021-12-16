@@ -12,4 +12,6 @@ public interface SuperHeroService {
   List<SuperHero> searchByName(String name);
 
   SuperHero update(SuperHero superHero);
+
+  SuperHero remove(Long id);
 }

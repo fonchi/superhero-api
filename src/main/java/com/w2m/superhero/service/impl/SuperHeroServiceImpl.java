@@ -61,4 +61,9 @@ public class SuperHeroServiceImpl implements SuperHeroService {
     //post superhero update metrics throught metrics collector service using metric tools like New Relic or DataDog
     return updatedSH;
   }
+
+  @Override
+  public SuperHero remove(Long id) {
+    return null;
+  }
 }
