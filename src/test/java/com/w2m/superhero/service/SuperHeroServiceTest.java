@@ -2,6 +2,7 @@ package com.w2m.superhero.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.only;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -94,7 +95,19 @@ public class SuperHeroServiceTest {
     verify(superHeroRepository, times(1)).save(updatedSH);
   }
 
-  //test update idempotency check
+  @Test
+  public void givenIdempotentUpdate_whenUpdate_thenReturnByIdempotency() {
+
+    SuperHero newSH = SuperHero.builder().id(1L).name("Robin").build();
+    SuperHero oldSH = SuperHero.builder().id(1L).name("Robin").build();
+
+    when(superHeroRepository.findById(newSH.getId())).thenReturn(Optional.of(oldSH));
+
+    SuperHero result = superHeroService.update(newSH);
+
+    assertEquals(oldSH, result);
+    verify(superHeroRepository, only()).findById(newSH.getId());
+  }
 
   //test update lock resource
 
