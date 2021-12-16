@@ -10,5 +10,5 @@ public interface SuperHeroService {
 
   List<SuperHero> findAll();
 
-  List<SuperHero> findLikeName(String name);
+  List<SuperHero> searchByName(String name);
 }

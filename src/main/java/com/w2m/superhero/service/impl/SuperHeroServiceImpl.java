@@ -33,7 +33,7 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   }
 
   @Override
-  public List<SuperHero> findLikeName(String name) {
+  public List<SuperHero> searchByName(String name) {
 
     List<SuperHero> superHeroes = superHeroRepository.findByNameIgnoreCaseContaining(name);
     return superHeroes;
