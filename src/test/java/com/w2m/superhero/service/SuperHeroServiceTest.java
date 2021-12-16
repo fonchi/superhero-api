@@ -41,7 +41,7 @@ public class SuperHeroServiceTest {
   }
 
   @Test
-  public void givenInvalidId_whenFindById_thenReturnNotFoundException() {
+  public void givenInvalidId_whenFindById_thenThrowNotFoundException() {
 
     Long id = -1L;
 
@@ -108,7 +108,4 @@ public class SuperHeroServiceTest {
     assertEquals(oldSH, result);
     verify(superHeroRepository, only()).findById(newSH.getId());
   }
-
-  //test update lock resource
-
 }

@@ -42,6 +42,9 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   @Override
   public SuperHero update(SuperHero superHero) {
 
+    //TODO
+    //resource locking to avoid race conditions using a lock service implementation
+
     SuperHero oldSH = findById(superHero.getId());
     if (oldSH.areIdempotent(superHero)) {
       return oldSH;
@@ -50,6 +53,12 @@ public class SuperHeroServiceImpl implements SuperHeroService {
     oldSH.setUpdatedDate(superHero.getUpdatedDate());
 
     SuperHero updatedSH = superHeroRepository.save(oldSH);
+
+    //TODO
+    //publish superhero updating event on news queue topic using a message queue producer (e.g. Kafka)
+
+    //TODO
+    //post superhero update metrics throught metrics collector service using metric tools like New Relic or DataDog
     return updatedSH;
   }
 }
