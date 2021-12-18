@@ -1,6 +1,6 @@
-package com.w2m.superhero.dto;
+package com.w2m.superhero.application.dto;
 
-import com.w2m.superhero.domain.SuperHero;
+import com.w2m.superhero.domain.model.SuperHero;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

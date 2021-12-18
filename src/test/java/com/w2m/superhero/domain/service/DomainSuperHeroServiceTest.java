@@ -1,4 +1,4 @@
-package com.w2m.superhero.service;
+package com.w2m.superhero.domain.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -9,9 +9,9 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.w2m.superhero.TestUtils;
-import com.w2m.superhero.domain.SuperHero;
-import com.w2m.superhero.exception.NotFoundException;
-import com.w2m.superhero.repository.SuperHeroRepository;
+import com.w2m.superhero.domain.model.SuperHero;
+import com.w2m.superhero.domain.exception.NotFoundException;
+import com.w2m.superhero.domain.repository.SuperHeroRepository;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
 @SpringBootTest
-public class SuperHeroServiceTest {
+public class DomainSuperHeroServiceTest {
 
   @Autowired
   SuperHeroService superHeroService;
@@ -68,7 +68,7 @@ public class SuperHeroServiceTest {
     String name = "man";
     List<SuperHero> superHeroes = TestUtils.createSuperHeroes();
 
-    when(superHeroRepository.findByNameIgnoreCaseContaining(name)).thenReturn(superHeroes);
+    when(superHeroRepository.findByFilters(name)).thenReturn(superHeroes);
 
     List<SuperHero> result = superHeroService.getSuperHeroes(name);
 

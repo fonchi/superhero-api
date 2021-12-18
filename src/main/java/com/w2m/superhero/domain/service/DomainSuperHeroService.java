@@ -1,9 +1,8 @@
-package com.w2m.superhero.service.impl;
+package com.w2m.superhero.domain.service;
 
-import com.w2m.superhero.domain.SuperHero;
-import com.w2m.superhero.exception.NotFoundException;
-import com.w2m.superhero.repository.SuperHeroRepository;
-import com.w2m.superhero.service.SuperHeroService;
+import com.w2m.superhero.domain.model.SuperHero;
+import com.w2m.superhero.domain.exception.NotFoundException;
+import com.w2m.superhero.domain.repository.SuperHeroRepository;
 import java.util.List;
 import java.util.Optional;
 import org.apache.logging.log4j.util.Strings;
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class SuperHeroServiceImpl implements SuperHeroService {
+public class DomainSuperHeroService implements SuperHeroService {
 
   @Autowired
   private SuperHeroRepository superHeroRepository;
@@ -30,7 +29,7 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   public List<SuperHero> getSuperHeroes(String name) {
 
     if (!Strings.isEmpty(name)) {
-      return superHeroRepository.findByNameIgnoreCaseContaining(name);
+      return superHeroRepository.findByFilters(name);
     }
     return superHeroRepository.findAll();
   }
