@@ -25,7 +25,7 @@ public class SuperHero {
   private Long id;
   private String name;
   private LocalDateTime creationDate;
-  private LocalDateTime updatedDate;
+  private LocalDateTime updateDate;
 
   public boolean areIdempotent(SuperHero superHero) {
     return id.equals(superHero.getId()) && name.equals(superHero.getName());

@@ -1,11 +1,11 @@
 package com.w2m.superhero.controller;
 
+import com.w2m.superhero.domain.SuperHero;
 import com.w2m.superhero.dto.SuperHeroRequestDto;
 import com.w2m.superhero.dto.SuperHeroResponseDto;
 import com.w2m.superhero.dto.SuperHeroesResponseDto;
 import com.w2m.superhero.service.SuperHeroService;
 import java.util.List;
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,31 +17,36 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/superheroes")
+@RequestMapping("superheroes")
 public class SuperHeroController {
 
   @Autowired
   private SuperHeroService superHeroService;
 
   @GetMapping("/{id}")
-  public Optional<SuperHeroResponseDto> getSuperHero(@PathVariable Long id) {
-    return null;
+  public SuperHeroResponseDto getSuperHero(@PathVariable Long id) {
+    SuperHero superHero = superHeroService.getSuperHero(id);
+    return SuperHeroResponseDto.fromEntity(superHero);
   }
 
   @GetMapping
-  public List<SuperHeroesResponseDto> getSuperHeroes(@RequestParam String name) {
-    return null;
+  public SuperHeroesResponseDto getSuperHeroes(@RequestParam(required = false) String name) {
+    List<SuperHero> superHeroes = superHeroService.getSuperHeroes(name);
+    return SuperHeroesResponseDto.fromEntities(superHeroes);
   }
 
   @PutMapping("/{id}")
-  public Optional<SuperHeroResponseDto> putSuperHero(@PathVariable Long id,
+  public SuperHeroResponseDto putSuperHero(@PathVariable Long id,
       @RequestBody SuperHeroRequestDto requestDto) {
-    return null;
+    requestDto.setId(id);
+    SuperHero superHero = superHeroService.updateSuperHero(requestDto.toEntity());
+    return SuperHeroResponseDto.fromEntity(superHero);
   }
 
   @DeleteMapping("/{id}")
-  public Optional<SuperHeroResponseDto> deleteSuperHero(@PathVariable Long id) {
-    return null;
+  public SuperHeroResponseDto deleteSuperHero(@PathVariable Long id) {
+    SuperHero superHero = superHeroService.removeSuperHero(id);
+    return SuperHeroResponseDto.fromEntity(superHero);
   }
 
 }

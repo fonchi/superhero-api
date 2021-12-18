@@ -6,6 +6,7 @@ import com.w2m.superhero.repository.SuperHeroRepository;
 import com.w2m.superhero.service.SuperHeroService;
 import java.util.List;
 import java.util.Optional;
+import org.apache.logging.log4j.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +17,7 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   private SuperHeroRepository superHeroRepository;
 
   @Override
-  public SuperHero findById(Long id) {
+  public SuperHero getSuperHero(Long id) {
 
     Optional<SuperHero> superHero = superHeroRepository.findById(id);
     if (!superHero.isPresent()) {
@@ -26,31 +27,26 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   }
 
   @Override
-  public List<SuperHero> findAll() {
+  public List<SuperHero> getSuperHeroes(String name) {
 
-    List<SuperHero> superHeroes = superHeroRepository.findAll();
-    return superHeroes;
+    if (!Strings.isEmpty(name)) {
+      return superHeroRepository.findByNameIgnoreCaseContaining(name);
+    }
+    return superHeroRepository.findAll();
   }
 
   @Override
-  public List<SuperHero> searchByName(String name) {
-
-    List<SuperHero> superHeroes = superHeroRepository.findByNameIgnoreCaseContaining(name);
-    return superHeroes;
-  }
-
-  @Override
-  public SuperHero update(SuperHero superHero) {
+  public SuperHero updateSuperHero(SuperHero superHero) {
 
     //TODO
     //resource locking to avoid race conditions using a lock service implementation
 
-    SuperHero oldSH = findById(superHero.getId());
+    SuperHero oldSH = getSuperHero(superHero.getId());
     if (oldSH.areIdempotent(superHero)) {
       return oldSH;
     }
     oldSH.setName(superHero.getName());
-    oldSH.setUpdatedDate(superHero.getUpdatedDate());
+    oldSH.setUpdateDate(superHero.getUpdateDate());
 
     SuperHero updatedSH = superHeroRepository.save(oldSH);
 
@@ -63,12 +59,12 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   }
 
   @Override
-  public SuperHero remove(Long id) {
+  public SuperHero removeSuperHero(Long id) {
 
     //TODO
     //apply sames todos of update method: lock, publish and post metrics
 
-    SuperHero superHero = findById(id);
+    SuperHero superHero = getSuperHero(id);
     superHeroRepository.delete(superHero);
 
     return superHero;
