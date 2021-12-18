@@ -80,8 +80,8 @@ public class SuperHeroServiceTest {
 
     SuperHero newSH = TestUtils.createSuperHero("Robin");
     newSH.setCreationDate(null);
+    newSH.setUpdateDate(null);
     SuperHero oldSH = TestUtils.createSuperHero("Batman");
-    oldSH.setUpdateDate(null);
     SuperHero updatedSH = TestUtils.createSuperHero("Robin");
 
     when(superHeroRepository.findById(newSH.getId())).thenReturn(Optional.of(oldSH));

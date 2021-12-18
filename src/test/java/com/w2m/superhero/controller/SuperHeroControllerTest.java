@@ -14,7 +14,6 @@ import com.w2m.superhero.TestUtils;
 import com.w2m.superhero.domain.SuperHero;
 import com.w2m.superhero.exception.NotFoundException;
 import com.w2m.superhero.service.SuperHeroService;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,9 +38,8 @@ public class SuperHeroControllerTest {
   public void givenGetRequest_whenGetSuperHero_thenReturnOneSuccess() throws Exception {
 
     SuperHero superHero = TestUtils.createSuperHero();
-    DateTimeFormatter df = DateTimeFormatter.ofPattern("uuuu-MM-dd'T'HH:mm:ss");
-    String creationDate = superHero.getCreationDate().format(df);
-    String updateDate = superHero.getUpdateDate().format(df);
+    String creationDate = superHero.getCreationDate().toString();
+    String updateDate = superHero.getUpdateDate().toString();
 
     when(superHeroService.getSuperHero(superHero.getId())).thenReturn(superHero);
 
@@ -127,6 +125,8 @@ public class SuperHeroControllerTest {
     String superHeroPutReqBodyJson = "{\"name\":\"Batman\"}";
     SuperHero superHero = SuperHero.builder().id(1L).name("Batman").build();
     SuperHero updatedSuperHero = TestUtils.createSuperHero();
+    String creationDate = updatedSuperHero.getCreationDate().toString();
+    String updateDate = updatedSuperHero.getUpdateDate().toString();
 
     when(superHeroService.updateSuperHero(superHero)).thenReturn(updatedSuperHero);
 
@@ -134,7 +134,11 @@ public class SuperHeroControllerTest {
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)
             .content(superHeroPutReqBodyJson))
-        .andExpect(status().isOk());
+        .andExpect(status().isOk())
+        .andExpect(jsonPath("$.id").value(updatedSuperHero.getId()))
+        .andExpect(jsonPath("$.name").value(updatedSuperHero.getName()))
+        .andExpect(jsonPath("$.creation_date").value(creationDate))
+        .andExpect(jsonPath("$.update_date").value(updateDate));
   }
 
   @Test
