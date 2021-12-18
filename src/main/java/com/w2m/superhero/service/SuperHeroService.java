@@ -5,13 +5,11 @@ import java.util.List;
 
 public interface SuperHeroService {
 
-  SuperHero findById(Long id);
+  SuperHero getSuperHero(Long id);
 
-  List<SuperHero> findAll();
+  List<SuperHero> getSuperHeroes(String name);
 
-  List<SuperHero> searchByName(String name);
+  SuperHero updateSuperHero(SuperHero superHero);
 
-  SuperHero update(SuperHero superHero);
-
-  SuperHero remove(Long id);
+  SuperHero removeSuperHero(Long id);
 }

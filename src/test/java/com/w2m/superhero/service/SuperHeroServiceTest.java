@@ -12,7 +12,6 @@ import com.w2m.superhero.TestUtils;
 import com.w2m.superhero.domain.SuperHero;
 import com.w2m.superhero.exception.NotFoundException;
 import com.w2m.superhero.repository.SuperHeroRepository;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
@@ -32,11 +31,11 @@ public class SuperHeroServiceTest {
   public void givenValidId_whenFindById_thenReturnSuperHero() {
 
     Long id = 1L;
-    SuperHero superHero = SuperHero.builder().id(id).name("Batman").build();
+    SuperHero superHero = TestUtils.createSuperHero();
 
     when(superHeroRepository.findById(id)).thenReturn(Optional.of(superHero));
 
-    SuperHero result = superHeroService.findById(id);
+    SuperHero result = superHeroService.getSuperHero(id);
 
     assertEquals(superHero, result);
   }
@@ -48,17 +47,17 @@ public class SuperHeroServiceTest {
 
     when(superHeroRepository.findById(id)).thenReturn(Optional.empty());
 
-    assertThrows(NotFoundException.class, () -> superHeroService.findById(id));
+    assertThrows(NotFoundException.class, () -> superHeroService.getSuperHero(id));
   }
 
   @Test
   public void whenFindAll_thenListAllSuperHeroes() {
 
-    List<SuperHero> superHeroes = TestUtils.getSuperHeroes();
+    List<SuperHero> superHeroes = TestUtils.createSuperHeroes();
 
     when(superHeroRepository.findAll()).thenReturn(superHeroes);
 
-    List<SuperHero> result = superHeroService.findAll();
+    List<SuperHero> result = superHeroService.getSuperHeroes(null);
 
     assertEquals(superHeroes, result);
   }
@@ -67,11 +66,11 @@ public class SuperHeroServiceTest {
   public void givenNameParam_whenSearchByName_thenListAllSuperHeroesThanMatched() {
 
     String name = "man";
-    List<SuperHero> superHeroes = TestUtils.getSuperHeroes();
+    List<SuperHero> superHeroes = TestUtils.createSuperHeroes();
 
     when(superHeroRepository.findByNameIgnoreCaseContaining(name)).thenReturn(superHeroes);
 
-    List<SuperHero> result = superHeroService.searchByName(name);
+    List<SuperHero> result = superHeroService.getSuperHeroes(name);
 
     assertEquals(superHeroes, result);
   }
@@ -79,17 +78,16 @@ public class SuperHeroServiceTest {
   @Test
   public void givenNewSuperHeroInfo_whenUpdate_thenSuperHeroUpdated() {
 
-    LocalDateTime updatedDate = LocalDateTime.of(2021, 12, 16, 00, 00, 00);
-    LocalDateTime creationDate = LocalDateTime.of(2021, 11, 01, 00, 00, 00);
-    SuperHero newSH = SuperHero.builder().id(1L).name("Robin").updatedDate(updatedDate).build();
-    SuperHero oldSH = SuperHero.builder().id(1L).name("Batman").creationDate(creationDate).build();
-    SuperHero updatedSH = SuperHero.builder().id(1L).name("Robin").creationDate(creationDate)
-        .updatedDate(updatedDate).build();
+    SuperHero newSH = TestUtils.createSuperHero("Robin");
+    newSH.setCreationDate(null);
+    SuperHero oldSH = TestUtils.createSuperHero("Batman");
+    oldSH.setUpdateDate(null);
+    SuperHero updatedSH = TestUtils.createSuperHero("Robin");
 
     when(superHeroRepository.findById(newSH.getId())).thenReturn(Optional.of(oldSH));
     when(superHeroRepository.save(updatedSH)).thenReturn(updatedSH);
 
-    SuperHero result = superHeroService.update(newSH);
+    SuperHero result = superHeroService.updateSuperHero(newSH);
 
     assertEquals(updatedSH, result);
     verify(superHeroRepository, times(1)).findById(newSH.getId());
@@ -99,12 +97,12 @@ public class SuperHeroServiceTest {
   @Test
   public void givenIdempotentUpdate_whenUpdate_thenReturnByIdempotency() {
 
-    SuperHero newSH = SuperHero.builder().id(1L).name("Robin").build();
-    SuperHero oldSH = SuperHero.builder().id(1L).name("Robin").build();
+    SuperHero newSH = TestUtils.createSuperHero("Robin");
+    SuperHero oldSH = TestUtils.createSuperHero("Robin");
 
     when(superHeroRepository.findById(newSH.getId())).thenReturn(Optional.of(oldSH));
 
-    SuperHero result = superHeroService.update(newSH);
+    SuperHero result = superHeroService.updateSuperHero(newSH);
 
     assertEquals(oldSH, result);
     verify(superHeroRepository, only()).findById(newSH.getId());
@@ -113,13 +111,13 @@ public class SuperHeroServiceTest {
   @Test
   public void givenAnValidSuperHeroId_whenRemove_thenSuccessDeleted() {
 
-    SuperHero superHero = TestUtils.getSuperHeroes().get(0);
+    SuperHero superHero = TestUtils.createSuperHeroes().get(0);
     Long id = superHero.getId();
 
     when(superHeroRepository.findById(id)).thenReturn(Optional.of(superHero));
     doNothing().when(superHeroRepository).delete(superHero);
 
-    SuperHero result = superHeroService.remove(id);
+    SuperHero result = superHeroService.removeSuperHero(id);
 
     assertEquals(superHero, result);
   }
@@ -131,6 +129,6 @@ public class SuperHeroServiceTest {
 
     when(superHeroRepository.findById(id)).thenReturn(Optional.empty());
 
-    assertThrows(NotFoundException.class, () -> superHeroService.findById(id));
+    assertThrows(NotFoundException.class, () -> superHeroService.getSuperHero(id));
   }
 }
