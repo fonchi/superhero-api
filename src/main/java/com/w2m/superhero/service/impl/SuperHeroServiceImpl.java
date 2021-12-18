@@ -65,6 +65,9 @@ public class SuperHeroServiceImpl implements SuperHeroService {
   @Override
   public SuperHero remove(Long id) {
 
+    //TODO
+    //apply sames todos of update method: lock, publish and post metrics
+
     SuperHero superHero = findById(id);
     superHeroRepository.delete(superHero);
 
