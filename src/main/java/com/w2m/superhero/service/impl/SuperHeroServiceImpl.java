@@ -46,7 +46,6 @@ public class SuperHeroServiceImpl implements SuperHeroService {
       return oldSH;
     }
     oldSH.setName(superHero.getName());
-    oldSH.setUpdateDate(superHero.getUpdateDate());
 
     SuperHero updatedSH = superHeroRepository.save(oldSH);
 
