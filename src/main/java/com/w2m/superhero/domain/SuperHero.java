@@ -1,6 +1,6 @@
 package com.w2m.superhero.domain;
 
-import java.time.LocalDateTime;
+import java.time.Instant;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,6 +10,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Getter
@@ -24,8 +26,10 @@ public class SuperHero {
   @GeneratedValue
   private Long id;
   private String name;
-  private LocalDateTime creationDate;
-  private LocalDateTime updateDate;
+  @CreationTimestamp
+  private Instant creationDate;
+  @UpdateTimestamp
+  private Instant updateDate;
 
   public boolean areIdempotent(SuperHero superHero) {
     return id.equals(superHero.getId()) && name.equals(superHero.getName());

@@ -1,7 +1,7 @@
 package com.w2m.superhero;
 
 import com.w2m.superhero.domain.SuperHero;
-import java.time.LocalDateTime;
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -20,8 +20,8 @@ public class TestUtils {
   }
 
   public static SuperHero createSuperHero(String name) {
-    LocalDateTime updatedDate = LocalDateTime.of(2021, 12, 17, 00, 00, 00);
-    LocalDateTime creationDate = LocalDateTime.of(2021, 12, 16, 00, 00, 00);
+    Instant creationDate = Instant.parse("2021-12-16T00:00:00.000Z");
+    Instant updatedDate = Instant.parse("2021-12-17T00:00:00.000Z");
     return SuperHero.builder().id(1L).name(name).creationDate(creationDate)
         .updateDate(updatedDate).build();
   }
