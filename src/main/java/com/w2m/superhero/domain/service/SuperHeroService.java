@@ -1,6 +1,6 @@
-package com.w2m.superhero.service;
+package com.w2m.superhero.domain.service;
 
-import com.w2m.superhero.domain.SuperHero;
+import com.w2m.superhero.domain.model.SuperHero;
 import java.util.List;
 
 public interface SuperHeroService {

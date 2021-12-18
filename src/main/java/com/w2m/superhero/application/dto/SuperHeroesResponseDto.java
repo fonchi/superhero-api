@@ -1,7 +1,7 @@
-package com.w2m.superhero.dto;
+package com.w2m.superhero.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.w2m.superhero.domain.SuperHero;
+import com.w2m.superhero.domain.model.SuperHero;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.Builder;

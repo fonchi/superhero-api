@@ -1,10 +1,10 @@
-package com.w2m.superhero.controller;
+package com.w2m.superhero.application.rest;
 
-import com.w2m.superhero.domain.SuperHero;
-import com.w2m.superhero.dto.SuperHeroRequestDto;
-import com.w2m.superhero.dto.SuperHeroResponseDto;
-import com.w2m.superhero.dto.SuperHeroesResponseDto;
-import com.w2m.superhero.service.SuperHeroService;
+import com.w2m.superhero.domain.model.SuperHero;
+import com.w2m.superhero.application.dto.SuperHeroRequestDto;
+import com.w2m.superhero.application.dto.SuperHeroResponseDto;
+import com.w2m.superhero.application.dto.SuperHeroesResponseDto;
+import com.w2m.superhero.domain.service.SuperHeroService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
