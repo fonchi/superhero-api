@@ -1,4 +1,4 @@
-package com.w2m.superhero.controller;
+package com.w2m.superhero.application.rest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -11,9 +11,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.w2m.superhero.TestUtils;
-import com.w2m.superhero.domain.SuperHero;
-import com.w2m.superhero.exception.NotFoundException;
-import com.w2m.superhero.service.SuperHeroService;
+import com.w2m.superhero.application.rest.SuperHeroController;
+import com.w2m.superhero.domain.model.SuperHero;
+import com.w2m.superhero.domain.exception.NotFoundException;
+import com.w2m.superhero.domain.service.SuperHeroService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

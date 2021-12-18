@@ -1,6 +1,6 @@
 package com.w2m.superhero;
 
-import com.w2m.superhero.domain.SuperHero;
+import com.w2m.superhero.domain.model.SuperHero;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Arrays;

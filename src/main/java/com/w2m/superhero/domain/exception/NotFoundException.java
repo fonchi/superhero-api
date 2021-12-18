@@ -1,4 +1,4 @@
-package com.w2m.superhero.exception;
+package com.w2m.superhero.domain.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
