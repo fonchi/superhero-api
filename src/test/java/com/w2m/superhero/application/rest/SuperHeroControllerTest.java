@@ -5,15 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.patch;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.w2m.superhero.TestUtils;
-import com.w2m.superhero.application.rest.SuperHeroController;
-import com.w2m.superhero.domain.model.SuperHero;
 import com.w2m.superhero.domain.exception.NotFoundException;
+import com.w2m.superhero.domain.model.SuperHero;
 import com.w2m.superhero.domain.service.SuperHeroService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -22,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -36,6 +36,7 @@ public class SuperHeroControllerTest {
   private SuperHeroService superHeroService;
 
   @Test
+  @WithMockUser
   public void givenGetRequest_whenGetSuperHero_thenReturnOneSuccess() throws Exception {
 
     SuperHero superHero = TestUtils.createSuperHero();
@@ -55,6 +56,7 @@ public class SuperHeroControllerTest {
   }
 
   @Test
+  @WithMockUser
   public void givenInvalidRequest_whenGetSuperHero_thenReturnNotFoundException() throws Exception {
 
     Long invalidId = -1L;
@@ -70,6 +72,7 @@ public class SuperHeroControllerTest {
   }
 
   @Test
+  @WithMockUser
   public void givenGetRequest_whenGetSuperHeroes_thenReturnAllSuccess() throws Exception {
 
     List<SuperHero> superHeroes = TestUtils.createSuperHeroes();
@@ -101,6 +104,7 @@ public class SuperHeroControllerTest {
   }
 
   @Test
+  @WithMockUser
   public void givenNameQueryParam_whenGetSuperHeroes_thenReturnAllThanMatched() throws Exception {
 
     List<SuperHero> superHeroes = TestUtils.createSuperHeroes();
@@ -121,6 +125,7 @@ public class SuperHeroControllerTest {
   }
 
   @Test
+  @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
   public void givenPutRequest_whenPutSuperHero_thenUpdateSuccess() throws Exception {
 
     String superHeroPutReqBodyJson = "{\"name\":\"Batman\"}";
@@ -131,7 +136,7 @@ public class SuperHeroControllerTest {
 
     when(superHeroService.updateSuperHero(superHero)).thenReturn(updatedSuperHero);
 
-    mvc.perform(put("/superheroes/{id}", superHero.getId())
+    mvc.perform(patch("/superheroes/{id}", superHero.getId())
             .contentType(MediaType.APPLICATION_JSON)
             .accept(MediaType.APPLICATION_JSON)
             .content(superHeroPutReqBodyJson))
@@ -143,6 +148,7 @@ public class SuperHeroControllerTest {
   }
 
   @Test
+  @WithMockUser(username = "admin", roles = {"USER", "ADMIN"})
   public void givenDeleteRequest_whenDeleteSuperHero_thenRemoveSuccess() throws Exception {
 
     SuperHero superHero = TestUtils.createSuperHero();
@@ -153,6 +159,14 @@ public class SuperHeroControllerTest {
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andDo(print());
+  }
+
+  @Test
+  public void givenRequestWithoutAuthentication_whenGetSuperHero_thenUnauthorized()
+      throws Exception {
+    mvc.perform(get("/superheroes/1"))
+        .andDo(print())
+        .andExpect(status().isUnauthorized());
   }
 
 }
