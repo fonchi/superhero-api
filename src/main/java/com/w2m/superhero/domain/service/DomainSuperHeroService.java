@@ -49,7 +49,7 @@ public class DomainSuperHeroService implements SuperHeroService {
     SuperHero updatedSH = superHeroRepository.save(oldSH);
 
     //TODO
-    //publish superhero updating event on news queue topic using a message queue producer (e.g. Kafka)
+    //publish superhero updating event on news queue topic using a message queue producer, e.g. Kafka or RabbitMQ
 
     //TODO
     //post superhero update metrics through metrics collector service using metric tools like New Relic or DataDog
