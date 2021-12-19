@@ -1,8 +1,8 @@
 package com.w2m.superhero.domain.service;
 
-import com.w2m.superhero.domain.model.SuperHero;
 import com.w2m.superhero.domain.exception.NotFoundException;
-import com.w2m.superhero.domain.repository.SuperHeroRepository;
+import com.w2m.superhero.domain.model.Superhero;
+import com.w2m.superhero.domain.repository.SuperheroRepository;
 import java.util.List;
 import java.util.Optional;
 import org.apache.logging.log4j.util.Strings;
@@ -10,43 +10,43 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class DomainSuperHeroService implements SuperHeroService {
+public class DomainSuperheroService implements SuperheroService {
 
   @Autowired
-  private SuperHeroRepository superHeroRepository;
+  private SuperheroRepository superheroRepository;
 
   @Override
-  public SuperHero getSuperHero(Long id) {
+  public Superhero getSuperhero(Long id) {
 
-    Optional<SuperHero> superHero = superHeroRepository.findById(id);
-    if (!superHero.isPresent()) {
+    Optional<Superhero> superhero = superheroRepository.findById(id);
+    if (!superhero.isPresent()) {
       throw new NotFoundException();
     }
-    return superHero.get();
+    return superhero.get();
   }
 
   @Override
-  public List<SuperHero> getSuperHeroes(String name) {
+  public List<Superhero> getSuperheroes(String name) {
 
     if (!Strings.isEmpty(name)) {
-      return superHeroRepository.findByFilters(name);
+      return superheroRepository.findByFilters(name);
     }
-    return superHeroRepository.findAll();
+    return superheroRepository.findAll();
   }
 
   @Override
-  public SuperHero updateSuperHero(SuperHero superHero) {
+  public Superhero updateSuperhero(Superhero superhero) {
 
     //TODO
     //resource locking to avoid race conditions using a lock service implementation
 
-    SuperHero oldSH = getSuperHero(superHero.getId());
-    if (oldSH.areIdempotent(superHero)) {
+    Superhero oldSH = getSuperhero(superhero.getId());
+    if (oldSH.areIdempotent(superhero)) {
       return oldSH;
     }
-    oldSH.setName(superHero.getName());
+    oldSH.setName(superhero.getName());
 
-    SuperHero updatedSH = superHeroRepository.save(oldSH);
+    Superhero updatedSH = superheroRepository.save(oldSH);
 
     //TODO
     //publish superhero updating event on news queue topic using a message queue producer, e.g. Kafka or RabbitMQ
@@ -57,14 +57,14 @@ public class DomainSuperHeroService implements SuperHeroService {
   }
 
   @Override
-  public SuperHero removeSuperHero(Long id) {
+  public Superhero removeSuperhero(Long id) {
 
     //TODO
     //apply sames todos of update method: lock, publish and post metrics
 
-    SuperHero superHero = getSuperHero(id);
-    superHeroRepository.delete(superHero);
+    Superhero superhero = getSuperhero(id);
+    superheroRepository.delete(superhero);
 
-    return superHero;
+    return superhero;
   }
 }

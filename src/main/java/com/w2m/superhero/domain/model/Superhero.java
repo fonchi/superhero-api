@@ -7,6 +7,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
@@ -14,14 +15,15 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
-public class SuperHero {
+@ToString
+public class Superhero {
 
   private Long id;
   private String name;
   private Instant creationDate;
   private Instant updateDate;
 
-  public boolean areIdempotent(SuperHero superHero) {
-    return id.equals(superHero.getId()) && name.equals(superHero.getName());
+  public boolean areIdempotent(Superhero superhero) {
+    return id.equals(superhero.getId()) && name.equals(superhero.getName());
   }
 }
