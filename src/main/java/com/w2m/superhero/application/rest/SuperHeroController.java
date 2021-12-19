@@ -1,16 +1,16 @@
 package com.w2m.superhero.application.rest;
 
-import com.w2m.superhero.domain.model.SuperHero;
 import com.w2m.superhero.application.dto.SuperHeroRequestDto;
 import com.w2m.superhero.application.dto.SuperHeroResponseDto;
 import com.w2m.superhero.application.dto.SuperHeroesResponseDto;
+import com.w2m.superhero.domain.model.SuperHero;
 import com.w2m.superhero.domain.service.SuperHeroService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -35,7 +35,7 @@ public class SuperHeroController {
     return SuperHeroesResponseDto.fromEntities(superHeroes);
   }
 
-  @PutMapping("/{id}")
+  @PatchMapping("/{id}")
   public SuperHeroResponseDto putSuperHero(@PathVariable Long id,
       @RequestBody SuperHeroRequestDto requestDto) {
     requestDto.setId(id);
