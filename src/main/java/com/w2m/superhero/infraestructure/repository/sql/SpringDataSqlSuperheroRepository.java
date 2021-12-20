@@ -5,10 +5,10 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SpringDataSqlSuperHeroRepository extends CrudRepository<SuperHeroEntity, Long> {
+public interface SpringDataSqlSuperheroRepository extends CrudRepository<SuperheroEntity, Long> {
 
-  List<SuperHeroEntity> findAll();
+  List<SuperheroEntity> findAll();
 
-  List<SuperHeroEntity> findByNameIgnoreCaseContaining(String name);
+  List<SuperheroEntity> findByNameIgnoreCaseContaining(String name);
 
 }
