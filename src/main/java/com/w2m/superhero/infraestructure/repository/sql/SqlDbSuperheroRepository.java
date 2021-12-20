@@ -23,7 +23,8 @@ public class SqlDbSuperheroRepository implements SuperheroRepository {
   public Optional<Superhero> findById(Long id) {
     Optional<SuperheroEntity> entity = sqlDbSuperheroRepository.findById(id);
     if (entity.isPresent()) {
-      return Optional.of(entity.get().toModel());
+      Superhero superhero = entity.get().toModel();
+      return Optional.of(superhero);
     }
     return Optional.empty();
   }
@@ -31,7 +32,6 @@ public class SqlDbSuperheroRepository implements SuperheroRepository {
   @Override
   public List<Superhero> findAll() {
     List<SuperheroEntity> entity = sqlDbSuperheroRepository.findAll();
-
     return SuperheroEntity.toModels(entity);
   }
 

@@ -9,14 +9,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity(name = "superhero")
 @Getter
 @NoArgsConstructor
-@ToString
 public class SuperheroEntity {
 
   @Id
