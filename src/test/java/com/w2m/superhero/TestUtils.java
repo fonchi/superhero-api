@@ -11,7 +11,7 @@ public class TestUtils {
   public static List<Superhero> createSuperheroes() {
     Superhero s1 = Superhero.builder().id(1L).name("Spiderman").build();
     Superhero s2 = Superhero.builder().id(2L).name("Superman").build();
-    Superhero s3 = Superhero.builder().id(3L).name("Manolito el fuerte").build();
+    Superhero s3 = Superhero.builder().id(3L).name("Batman").build();
     return new ArrayList(Arrays.asList(s1, s2, s3));
   }
 
