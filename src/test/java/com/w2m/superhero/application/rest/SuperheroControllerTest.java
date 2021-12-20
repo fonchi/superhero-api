@@ -60,14 +60,14 @@ public class SuperheroControllerTest {
   public void givenInvalidRequest_whenGetSuperhero_thenReturnNotFoundException() throws Exception {
 
     Long invalidId = -1L;
-    when(superheroService.getSuperhero(invalidId)).thenThrow(new NotFoundException());
+    String message = String.format("Superhero not found by id = %s", invalidId);
+    when(superheroService.getSuperhero(invalidId)).thenThrow(new NotFoundException(message));
 
     mvc.perform(get("/superheroes/{id}", invalidId)
             .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isNotFound())
         .andExpect(result -> assertTrue(result.getResolvedException() instanceof NotFoundException))
-        .andExpect(result -> assertEquals("resource not found",
-            result.getResolvedException().getMessage()))
+        .andExpect(result -> assertEquals(message, result.getResolvedException().getMessage()))
         .andDo(print());
   }
 

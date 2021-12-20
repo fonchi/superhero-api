@@ -26,8 +26,7 @@ public class DomainSuperheroService implements SuperheroService {
 
     Optional<Superhero> superhero = superheroRepository.findById(id);
     if (!superhero.isPresent()) {
-      logger.error("Superhero not found by id = {}", id);
-      throw new NotFoundException();
+      throw new NotFoundException(String.format("Superhero not found by id = %s", id));
     }
     return superhero.get();
   }
@@ -51,7 +50,7 @@ public class DomainSuperheroService implements SuperheroService {
 
     Superhero oldSH = getSuperhero(superhero.getId());
     if (oldSH.areIdempotent(superhero)) {
-      logger.warn("Idempotent response for superhero {}", superhero);
+      logger.info("Idempotent response for superhero {}", superhero);
       return oldSH;
     }
     oldSH.setName(superhero.getName());
