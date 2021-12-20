@@ -1,4 +1,4 @@
-package com.w2m.superhero.domain.service;
+package com.w2m.superhero.unit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -12,6 +12,7 @@ import com.w2m.superhero.TestUtils;
 import com.w2m.superhero.domain.exception.NotFoundException;
 import com.w2m.superhero.domain.model.Superhero;
 import com.w2m.superhero.domain.repository.SuperheroRepository;
+import com.w2m.superhero.domain.service.SuperheroService;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
