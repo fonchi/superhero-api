@@ -1,6 +1,6 @@
 package com.w2m.superhero.infraestructure.repository.sql;
 
-import com.w2m.superhero.domain.model.SuperHero;
+import com.w2m.superhero.domain.model.Superhero;
 import java.time.Instant;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,10 +12,10 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-@Entity(name = "super_hero")
+@Entity(name = "superhero")
 @Getter
 @NoArgsConstructor
-public class SuperHeroEntity {
+public class SuperheroEntity {
 
   @Id
   @GeneratedValue
@@ -26,15 +26,15 @@ public class SuperHeroEntity {
   @UpdateTimestamp
   private Instant updateDate;
 
-  public SuperHeroEntity(SuperHero superHero) {
-    id = superHero.getId();
-    name = superHero.getName();
-    creationDate = superHero.getCreationDate();
-    updateDate = superHero.getUpdateDate();
+  public SuperheroEntity(Superhero superhero) {
+    id = superhero.getId();
+    name = superhero.getName();
+    creationDate = superhero.getCreationDate();
+    updateDate = superhero.getUpdateDate();
   }
 
-  public SuperHero toModel() {
-    return SuperHero.builder()
+  public Superhero toModel() {
+    return Superhero.builder()
         .id(id)
         .name(name)
         .creationDate(creationDate)
@@ -42,8 +42,8 @@ public class SuperHeroEntity {
         .build();
   }
 
-  public static List<SuperHero> toModels(List<SuperHeroEntity> entities) {
-    return entities.stream().map(SuperHeroEntity::toModel).collect(Collectors.toList());
+  public static List<Superhero> toModels(List<SuperheroEntity> entities) {
+    return entities.stream().map(SuperheroEntity::toModel).collect(Collectors.toList());
   }
 
 }

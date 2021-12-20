@@ -1,16 +1,17 @@
 package com.w2m.superhero.domain.exception;
 
+import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
+@Getter
 public class NotFoundException extends RuntimeException {
 
-  public NotFoundException() {
-    super("resource not found");
-  }
+  private HttpStatus status = HttpStatus.NOT_FOUND;
+  private String error = "Resource not found";
+  private String message;
 
   public NotFoundException(String message) {
     super(message);
+    this.message = message;
   }
 }
