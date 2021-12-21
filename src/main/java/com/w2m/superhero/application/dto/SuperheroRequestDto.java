@@ -5,6 +5,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * DTO for put request superhero data
+ */
 @Builder
 @Getter
 @Setter
@@ -13,6 +16,10 @@ public class SuperheroRequestDto {
   private Long id;
   private String name;
 
+  /**
+   * Constructor to map dto to entity
+   * @return
+   */
   public Superhero toEntity() {
     return Superhero.builder()
         .id(id)

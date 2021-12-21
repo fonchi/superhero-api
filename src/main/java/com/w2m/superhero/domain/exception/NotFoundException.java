@@ -3,6 +3,9 @@ package com.w2m.superhero.domain.exception;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
+/**
+ * Custom NotFoundException
+ */
 @Getter
 public class NotFoundException extends RuntimeException {
 

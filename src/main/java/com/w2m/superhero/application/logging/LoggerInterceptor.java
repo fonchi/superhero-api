@@ -8,12 +8,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+/**
+ * Interceptor for logging method measure data based on AOP capability
+ */
 @Aspect
 @Component
 public class LoggerInterceptor {
 
   private static final Logger logger = LoggerFactory.getLogger(LoggerInterceptor.class);
 
+  /**
+   * logging of method time execution
+   * @param point
+   * @return
+   * @throws Throwable
+   */
   @Around("execution(* *(..)) && @annotation(Timing)")
   public Object log(ProceedingJoinPoint point) throws Throwable {
     long initTime = System.currentTimeMillis();

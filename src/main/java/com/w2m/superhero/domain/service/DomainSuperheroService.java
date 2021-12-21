@@ -12,6 +12,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * Superhero service that contains domain logic
+ */
 @Service
 public class DomainSuperheroService implements SuperheroService {
 
@@ -20,6 +23,11 @@ public class DomainSuperheroService implements SuperheroService {
   @Autowired
   private SuperheroRepository superheroRepository;
 
+  /**
+   * method for get superhero by resource id. If it doesn't exists returns not found resource exception
+   * @param id
+   * @return
+   */
   @Timing
   @Override
   public Superhero getSuperhero(Long id) {
@@ -31,6 +39,12 @@ public class DomainSuperheroService implements SuperheroService {
     return superhero.get();
   }
 
+  /**
+   * method for get superheroes based on name filter param. If filter is null or empty
+   * the method returns all persisted superheroes
+   * @param name
+   * @return
+   */
   @Timing
   @Override
   public List<Superhero> getSuperheroes(String name) {
@@ -41,6 +55,12 @@ public class DomainSuperheroService implements SuperheroService {
     return superheroRepository.findAll();
   }
 
+  /**
+   * method for update superhero that it matches with id, replacing the name attribute.
+   * Before performed it, validates the resource existence and idempotency of request
+   * @param superhero
+   * @return
+   */
   @Timing
   @Override
   public Superhero updateSuperhero(Superhero superhero) {
@@ -65,6 +85,11 @@ public class DomainSuperheroService implements SuperheroService {
     return updatedSH;
   }
 
+  /**
+   * method for remove superhero based on resource id with existence pre validation
+   * @param id
+   * @return
+   */
   @Timing
   @Override
   public Superhero removeSuperhero(Long id) {

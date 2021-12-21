@@ -7,6 +7,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * DTO for response superhero data
+ */
 @Builder
 @Getter
 @Setter
@@ -19,6 +22,11 @@ public class SuperheroResponseDto {
   @JsonProperty("update_date")
   private Instant updateDate;
 
+  /**
+   * Map superhero model to superhero response dto
+   * @param superhero
+   * @return
+   */
   public static SuperheroResponseDto fromEntity(Superhero superhero) {
     return SuperheroResponseDto.builder()
         .id(superhero.getId())
