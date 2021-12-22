@@ -9,7 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import com.w2m.superhero.TestUtils;
-import com.w2m.superhero.domain.exception.NotFoundException;
+import com.w2m.superhero.infrastructure.exception.NotFoundException;
 import com.w2m.superhero.domain.model.Superhero;
 import com.w2m.superhero.domain.repository.SuperheroRepository;
 import com.w2m.superhero.domain.service.SuperheroService;

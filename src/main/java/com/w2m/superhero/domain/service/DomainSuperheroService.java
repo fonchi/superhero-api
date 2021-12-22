@@ -1,7 +1,7 @@
 package com.w2m.superhero.domain.service;
 
-import com.w2m.superhero.application.logging.Timing;
-import com.w2m.superhero.domain.exception.NotFoundException;
+import com.w2m.superhero.infrastructure.logging.Timing;
+import com.w2m.superhero.infrastructure.exception.NotFoundException;
 import com.w2m.superhero.domain.model.Superhero;
 import com.w2m.superhero.domain.repository.SuperheroRepository;
 import java.util.List;

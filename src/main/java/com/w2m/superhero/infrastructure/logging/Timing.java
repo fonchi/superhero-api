@@ -1,4 +1,4 @@
-package com.w2m.superhero.application.logging;
+package com.w2m.superhero.infrastructure.logging;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
