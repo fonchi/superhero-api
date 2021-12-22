@@ -20,6 +20,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
+/**
+ * Unit tests of superhero domain service
+ */
 @SpringBootTest
 public class DomainSuperheroServiceTest {
 

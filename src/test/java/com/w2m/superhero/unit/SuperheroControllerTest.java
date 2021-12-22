@@ -26,6 +26,9 @@ import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 
+/**
+ * Unit tests of superhero rest controller
+ */
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = SuperheroController.class)
 public class SuperheroControllerTest {
