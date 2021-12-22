@@ -8,6 +8,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
+/**
+ * DTO for return a list of superheroes
+ */
 @Builder
 @Getter
 @Setter
@@ -17,6 +20,11 @@ public class SuperheroesResponseDto {
   @JsonProperty("superheroes")
   private List<SuperheroResponseDto> superheroes;
 
+  /**
+   * map list of superheroes to superheroes response dto
+   * @param superheroes
+   * @return
+   */
   public static SuperheroesResponseDto fromEntities(List<Superhero> superheroes) {
     List<SuperheroResponseDto> dtos = superheroes.stream()
         .map(SuperheroResponseDto::fromEntity).collect(Collectors.toList());
