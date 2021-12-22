@@ -11,6 +11,9 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
+/**
+ * SQL database implementation of the superhero repository
+ */
 @Component
 @CacheConfig(cacheNames = "superhero-cache")
 public class SqlDbSuperheroRepository implements SuperheroRepository {

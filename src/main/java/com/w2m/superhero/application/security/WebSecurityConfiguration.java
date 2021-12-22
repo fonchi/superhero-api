@@ -7,10 +7,18 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/**
+ * Web security configuration using Spring Security to adding users and rules based on each profile
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+  /**
+   * Configure users and profiles
+   * @param auth
+   * @throws Exception
+   */
   @Override
   protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 
@@ -20,6 +28,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .withUser("admin").password("{noop}password").roles("USER", "ADMIN");
   }
 
+  /**
+   * Configure rules based on each user profile
+   * @param http
+   * @throws Exception
+   */
   @Override
   protected void configure(HttpSecurity http) throws Exception {
 

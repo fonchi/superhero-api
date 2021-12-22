@@ -12,6 +12,9 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+/**
+ * Superhero persistence entity
+ */
 @Entity(name = "superhero")
 @Getter
 @NoArgsConstructor
@@ -26,6 +29,10 @@ public class SuperheroEntity {
   @UpdateTimestamp
   private Instant updateDate;
 
+  /**
+   * Constructor entity based on superhero domain model
+   * @param superhero
+   */
   public SuperheroEntity(Superhero superhero) {
     id = superhero.getId();
     name = superhero.getName();
@@ -33,6 +40,10 @@ public class SuperheroEntity {
     updateDate = superhero.getUpdateDate();
   }
 
+  /**
+   * Mapping a superhero entity to a domain model
+   * @return
+   */
   public Superhero toModel() {
     return Superhero.builder()
         .id(id)
@@ -42,6 +53,11 @@ public class SuperheroEntity {
         .build();
   }
 
+  /**
+   * Mapping a list of superhero entities to a list of superhero models
+   * @param entities
+   * @return
+   */
   public static List<Superhero> toModels(List<SuperheroEntity> entities) {
     return entities.stream().map(SuperheroEntity::toModel).collect(Collectors.toList());
   }
