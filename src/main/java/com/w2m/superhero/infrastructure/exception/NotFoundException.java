@@ -1,4 +1,4 @@
-package com.w2m.superhero.domain.exception;
+package com.w2m.superhero.infrastructure.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

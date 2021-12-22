@@ -1,4 +1,4 @@
-package com.w2m.superhero.infraestructure.repository.sql;
+package com.w2m.superhero.infrastructure.repository.sql;
 
 import com.w2m.superhero.domain.model.Superhero;
 import com.w2m.superhero.domain.repository.SuperheroRepository;

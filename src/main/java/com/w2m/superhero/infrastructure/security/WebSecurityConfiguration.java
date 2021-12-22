@@ -1,4 +1,4 @@
-package com.w2m.superhero.application.security;
+package com.w2m.superhero.infrastructure.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;

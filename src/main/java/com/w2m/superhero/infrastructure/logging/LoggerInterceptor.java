@@ -1,4 +1,4 @@
-package com.w2m.superhero.application.logging;
+package com.w2m.superhero.infrastructure.logging;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -23,7 +23,7 @@ public class LoggerInterceptor {
    * @return
    * @throws Throwable
    */
-  @Around("execution(* *(..)) && @annotation(Timing)")
+  @Around("execution(* *(..)) && @annotation(com.w2m.superhero.infrastructure.logging.Timing)")
   public Object log(ProceedingJoinPoint point) throws Throwable {
     long initTime = System.currentTimeMillis();
     Object result = point.proceed();
