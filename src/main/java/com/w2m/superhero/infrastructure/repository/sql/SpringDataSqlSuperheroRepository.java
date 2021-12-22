@@ -1,4 +1,4 @@
-package com.w2m.superhero.infraestructure.repository.sql;
+package com.w2m.superhero.infrastructure.repository.sql;
 
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;

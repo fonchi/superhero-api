@@ -11,7 +11,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import com.w2m.superhero.TestUtils;
-import com.w2m.superhero.domain.exception.NotFoundException;
+import com.w2m.superhero.infrastructure.exception.NotFoundException;
 import com.w2m.superhero.domain.model.Superhero;
 import com.w2m.superhero.domain.service.SuperheroService;
 import org.junit.jupiter.api.Test;

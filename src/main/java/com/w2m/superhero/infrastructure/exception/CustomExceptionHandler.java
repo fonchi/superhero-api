@@ -1,4 +1,4 @@
-package com.w2m.superhero.domain.exception;
+package com.w2m.superhero.infrastructure.exception;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
